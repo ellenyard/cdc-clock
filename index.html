@@ -323,6 +323,10 @@
 
         /* Responsive adjustments */
         @media (max-width: 480px) {
+            .container {
+                padding-bottom: 4rem;
+            }
+
             .clock-face {
                 width: 260px;
                 height: 260px;
@@ -345,12 +349,25 @@
                 width: 70px;
             }
 
+            .hour-hand {
+                height: 55px;
+            }
+
+            .minute-hand {
+                height: 80px;
+            }
+
             .digital-time {
                 font-size: 3rem;
             }
 
             .digital-time .seconds {
                 font-size: 1.8rem;
+            }
+
+            .footer {
+                font-size: 0.75rem;
+                padding: 0 1rem;
             }
         }
 
