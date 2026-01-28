@@ -192,6 +192,54 @@
             transform-origin: 2.5px 148px;
         }
 
+        /* Clock hands */
+        .clock-hands {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .hand {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            transform-origin: 50% 100%;
+            border-radius: 4px;
+        }
+
+        .hour-hand {
+            width: 6px;
+            height: 70px;
+            margin-left: -3px;
+            background: linear-gradient(to top, var(--cdc-gold) 0%, #ffd700 100%);
+            box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+            z-index: 3;
+        }
+
+        .minute-hand {
+            width: 4px;
+            height: 100px;
+            margin-left: -2px;
+            background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, #ffffff 100%);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            z-index: 4;
+        }
+
+        .center-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--cdc-gold);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            box-shadow: 0 0 15px rgba(245, 166, 35, 0.6);
+        }
+
         /* Digital time display */
         .digital-time {
             font-family: 'JetBrains Mono', monospace;
@@ -327,6 +375,11 @@
         <div class="clock-container">
             <div class="clock-face">
                 <div class="hour-markers" id="hourMarkers"></div>
+                <div class="clock-hands">
+                    <div class="hand hour-hand" id="hourHand"></div>
+                    <div class="hand minute-hand" id="minuteHand"></div>
+                    <div class="center-dot"></div>
+                </div>
                 <div class="logo-container">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/US_CDC_logo.svg" alt="CDC Logo" crossorigin="anonymous">
                 </div>
@@ -385,15 +438,24 @@
 
             // Parse time components
             const timeParts = timeString.match(/(\d{2}):(\d{2}):(\d{2})\s*(AM|PM)/i);
-            
+
             if (timeParts) {
-                const hours = timeParts[1];
-                const minutes = timeParts[2];
-                const seconds = timeParts[3];
+                const hours = parseInt(timeParts[1]);
+                const minutes = parseInt(timeParts[2]);
+                const seconds = parseInt(timeParts[3]);
                 const ampm = timeParts[4];
 
-                document.getElementById('digitalTime').innerHTML = 
-                    `${hours}:${minutes}<span class="seconds">${seconds}</span><span class="ampm">${ampm}</span>`;
+                // Update digital display
+                document.getElementById('digitalTime').innerHTML =
+                    `${timeParts[1]}:${timeParts[2]}<span class="seconds">${timeParts[3]}</span><span class="ampm">${ampm}</span>`;
+
+                // Calculate hand rotations
+                const hourDeg = ((hours % 12) * 30) + (minutes * 0.5); // 30 deg per hour + 0.5 deg per minute
+                const minuteDeg = (minutes * 6) + (seconds * 0.1); // 6 deg per minute + 0.1 deg per second
+
+                // Apply rotations
+                document.getElementById('hourHand').style.transform = `rotate(${hourDeg}deg)`;
+                document.getElementById('minuteHand').style.transform = `rotate(${minuteDeg}deg)`;
             }
 
             document.getElementById('dateDisplay').textContent = dateString;
