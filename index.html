@@ -323,56 +323,68 @@
 
         /* Responsive adjustments */
         @media (max-width: 480px) {
-            body {
-                justify-content: flex-start;
-                padding-top: 3rem;
-            }
-
-            .container {
-                padding-bottom: 4rem;
+            .clock-container {
+                margin-bottom: 1rem;
             }
 
             .clock-face {
-                width: 260px;
-                height: 260px;
+                width: 220px;
+                height: 220px;
             }
 
             .hour-marker {
-                transform-origin: 2px 118px;
+                height: 12px;
+                transform-origin: 2px 98px;
             }
 
             .hour-marker.major {
-                transform-origin: 2.5px 118px;
+                height: 16px;
+                transform-origin: 2.5px 98px;
             }
 
             .logo-container {
-                width: 80px;
-                height: 80px;
+                width: 70px;
+                height: 70px;
             }
 
             .logo-container img {
-                width: 70px;
+                width: 60px;
             }
 
             .hour-hand {
-                height: 55px;
+                height: 45px;
             }
 
             .minute-hand {
-                height: 80px;
+                height: 65px;
+            }
+
+            .timezone-label {
+                font-size: 1rem;
+                margin-bottom: 0.3rem;
             }
 
             .digital-time {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                margin-bottom: 0.3rem;
             }
 
             .digital-time .seconds {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+            }
+
+            .ampm {
+                font-size: 1.2rem;
+            }
+
+            .date-display {
+                font-size: 0.95rem;
             }
 
             .footer {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 padding: 0 1rem;
+                bottom: 0.75rem;
             }
         }
 
